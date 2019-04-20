@@ -4,11 +4,11 @@
 #
 Name     : perl-File-Touch
 Version  : 0.11
-Release  : 9
+Release  : 10
 URL      : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.11.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.11.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-touch-perl/libfile-touch-perl_0.11-1.debian.tar.xz
-Summary  : 'update file access and modification times, optionally creating files if needed'
+Summary  : File::Touch update file access and modification times, optionally creating files if needed
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Touch-license = %{version}-%{release}
@@ -23,6 +23,7 @@ update file access and modification times, optionally creating files if needed
 Summary: dev components for the perl-File-Touch package.
 Group: Development
 Provides: perl-File-Touch-devel = %{version}-%{release}
+Requires: perl-File-Touch = %{version}-%{release}
 
 %description dev
 dev components for the perl-File-Touch package.
@@ -41,7 +42,7 @@ license components for the perl-File-Touch package.
 cd ..
 %setup -q -T -D -n File-Touch-0.11 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Touch-0.11/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Touch-0.11/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
