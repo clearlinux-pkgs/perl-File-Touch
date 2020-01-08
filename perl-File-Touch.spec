@@ -4,14 +4,15 @@
 #
 Name     : perl-File-Touch
 Version  : 0.11
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.11.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.11.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-touch-perl/libfile-touch-perl_0.11-1.debian.tar.xz
-Summary  : File::Touch update file access and modification times, optionally creating files if needed
+Summary  : 'update file access and modification times, optionally creating files if needed'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-File-Touch-license = %{version}-%{release}
+Requires: perl-File-Touch-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -37,18 +38,28 @@ Group: Default
 license components for the perl-File-Touch package.
 
 
+%package perl
+Summary: perl components for the perl-File-Touch package.
+Group: Default
+Requires: perl-File-Touch = %{version}-%{release}
+
+%description perl
+perl components for the perl-File-Touch package.
+
+
 %prep
 %setup -q -n File-Touch-0.11
-cd ..
-%setup -q -T -D -n File-Touch-0.11 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libfile-touch-perl_0.11-1.debian.tar.xz
+cd %{_builddir}/File-Touch-0.11
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/File-Touch-0.11/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/File-Touch-0.11/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -58,7 +69,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -67,8 +78,8 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Touch
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Touch/LICENSE
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Touch/deblicense_copyright
+cp %{_builddir}/File-Touch-0.11/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Touch/da4b651334951322707e858f051a633fc12de5ed
+cp %{_builddir}/File-Touch-0.11/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Touch/3baac3cbe3e5e9d4d8d6cc75b6c8aa6be5636151
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,7 +92,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/File/Touch.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -89,5 +99,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-File-Touch/LICENSE
-/usr/share/package-licenses/perl-File-Touch/deblicense_copyright
+/usr/share/package-licenses/perl-File-Touch/3baac3cbe3e5e9d4d8d6cc75b6c8aa6be5636151
+/usr/share/package-licenses/perl-File-Touch/da4b651334951322707e858f051a633fc12de5ed
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/File/Touch.pm
