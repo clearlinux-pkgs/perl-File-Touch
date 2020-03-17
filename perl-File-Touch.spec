@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Touch
 Version  : 0.11
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.11.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.11.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-touch-perl/libfile-touch-perl_0.11-1.debian.tar.xz
@@ -79,7 +79,7 @@ make TEST_VERBOSE=1 test
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-File-Touch
 cp %{_builddir}/File-Touch-0.11/LICENSE %{buildroot}/usr/share/package-licenses/perl-File-Touch/da4b651334951322707e858f051a633fc12de5ed
-cp %{_builddir}/File-Touch-0.11/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-File-Touch/3baac3cbe3e5e9d4d8d6cc75b6c8aa6be5636151
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-File-Touch/3baac3cbe3e5e9d4d8d6cc75b6c8aa6be5636151
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -104,4 +104,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/File/Touch.pm
+/usr/lib/perl5/vendor_perl/5.30.2/File/Touch.pm
