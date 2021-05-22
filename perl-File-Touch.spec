@@ -4,7 +4,7 @@
 #
 Name     : perl-File-Touch
 Version  : 0.12
-Release  : 18
+Release  : 19
 URL      : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.12.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/N/NE/NEILB/File-Touch-0.12.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libf/libfile-touch-perl/libfile-touch-perl_0.11-1.debian.tar.xz
